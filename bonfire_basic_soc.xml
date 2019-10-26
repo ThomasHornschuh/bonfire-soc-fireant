@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<efx:project name="bonfire_basic_soc" description="" last_change_date="Di. Oktober 22 2019 21:40:43" location="/home/thomas/development/Effinix/bonfire-basic-soc_0" sw_version="2019.2.192" last_run_state="pass" last_run_tool="efx_pnr" last_run_flow="route" config_result_in_sync="true" design_ood="sync" place_ood="sync" route_ood="sync" xmlns:efx="http://www.efinixinc.com/enf_proj" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efinixinc.com/enf_proj enf_proj.xsd">
+    <efx:device_info>
+        <efx:family name="Trion"/>
+        <efx:device name="T8F81"/>
+        <efx:timing_model name="C2"/>
+    </efx:device_info>
+    <efx:design_info def_veri_version="verilog_2k" def_vhdl_version="vhdl_2008">
+        <efx:top_module name=""/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/riscv_interrupts.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/riscv_csr_unit.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_interrupt_mux.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_fetch.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_alu.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/riscv_decode.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/bonfire_cpu_top.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_cpu.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_ubuf.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/csr_def.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_mul_seq.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/riscv_mulsp6.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/riscv_counter_64Bit.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32u_top.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_dbus.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/bonfire_fetch.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_execute.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_scratchpad.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/riscv_regfile.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/riscv_decodeutil.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_mul16x16.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_decode.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_compl.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/riscv_local_memmap.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_ram256x32.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_divider.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_shifter.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_mul_opt.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_mul_dsp.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-cpu_0/rtl/bonfire_dm_icache.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-basic-soc_0/byte_swapper.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-basic-soc_0/cpu_dbus_connect.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-basic-soc_0/bonfire_basic_soc_top.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-basic-soc_0/dram_arbiter.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-basic-soc_0/wbs_memory_interface.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-util_0/log2.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/zpuino-uart_0/tx_unit.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/zpuino-uart_0/zpuino_uart_fifo.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/zpuino-uart_0/zpuino_uart.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/zpuino-uart_0/uart_rx.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/zpuino-uart_0/uart_brgen.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/zpuino-uart_0/uart_mv_filter.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-basic-soc_0/ram8.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-basic-soc_0/main_memory_laned.vhd" version="vhdl_2008"/>
+        <efx:top_vhdl_arch name=""/>
+    </efx:design_info>
+    <efx:constraint_info>
+        <efx:sdc_file name=""/>
+        <efx:inter_file name=""/>
+    </efx:constraint_info>
+    <efx:sim_info/>
+    <efx:misc_info/>
+    <efx:synthesis tool_name="efx_map">
+        <efx:param name="work_dir" value="work_syn" value_type="e_string"/>
+        <efx:param name="write_efx_verilog" value="on" value_type="e_bool"/>
+        <efx:param name="opt_mode" value="speed" value_type="e_option"/>
+    </efx:synthesis>
+    <efx:place_and_route tool_name="efx_pnr">
+        <efx:param name="work_dir" value="work_pnr" value_type="e_string"/>
+        <efx:param name="verbose" value="off" value_type="e_bool"/>
+        <efx:param name="load_delaym" value="on" value_type="e_bool"/>
+    </efx:place_and_route>
+    <efx:bitstream_generation tool_name="efx_pgm">
+        <efx:param name="mode" value="active" value_type="e_string"/>
+        <efx:param name="width" value="1" value_type="e_string"/>
+        <efx:param name="cold_boot" value="off" value_type="e_bool"/>
+        <efx:param name="cascade" value="off" value_type="e_option"/>
+        <efx:param name="enable_roms" value="on" value_type="e_option"/>
+        <efx:param name="spi_low_power_mode" value="on" value_type="e_bool"/>
+        <efx:param name="io_weak_pullup" value="on" value_type="e_bool"/>
+        <efx:param name="oscillator_clock_divider" value="DIV8" value_type="e_option"/>
+        <efx:param name="enable_crc_check" value="on" value_type="e_bool"/>
+    </efx:bitstream_generation>
+</efx:project>
