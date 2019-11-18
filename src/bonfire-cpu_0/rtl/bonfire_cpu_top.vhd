@@ -253,6 +253,7 @@ cpu_inst: entity work.lxp32_cpu(rtl)
    );
 
 
+   lli_cache_busy <= '0';
 
    -- icache_inst:  entity work.bonfire_dm_icache
    -- generic map(
