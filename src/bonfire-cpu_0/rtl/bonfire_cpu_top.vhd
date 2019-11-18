@@ -253,38 +253,46 @@ cpu_inst: entity work.lxp32_cpu(rtl)
    );
 
 
-   lli_cache_busy <= '0';
+  gen_icache: if CACHE_SIZE_WORDS>0 generate
 
-   -- icache_inst:  entity work.bonfire_dm_icache
-   -- generic map(
-   --       LINE_SIZE=>CACHE_LINE_SIZE_WORDS,
-   --       CACHE_SIZE=>CACHE_SIZE_WORDS,
-   --       FIX_BUSY=>true
-   --    )
-   --    port map(
-   --       clk_i=>clk_i,
-   --       rst_i=>rst_i,
-   --
-   --       lli_re_i=>icache_re,
-   --       lli_adr_i=>lli_adr,
-   --       lli_dat_o=>lli_dat_cache,
-   --       lli_busy_o=>lli_cache_busy,
-   --
-   --       wbm_cyc_o=>wb_ibus_cyc_o,
-   --       wbm_stb_o=>wb_ibus_stb_o,
-   --       wbm_cti_o=>wb_ibus_cti_o,
-   --       wbm_bte_o=>wb_ibus_bte_o,
-   --       wbm_ack_i=>wb_ibus_ack_i,
-   --       wbm_adr_o=>wb_ibus_adr_o,
-   --       wbm_dat_i=>wb_ibus_dat_i,
-   --       cc_invalidate_i => lli_cc_invalidate,
-   --       cc_invalidate_complete_o => open
-   --
-   --    );
+         icache_inst:  entity work.bonfire_dm_icache
+         generic map(
+               LINE_SIZE=>CACHE_LINE_SIZE_WORDS,
+               CACHE_SIZE=>CACHE_SIZE_WORDS,
+               FIX_BUSY=>true
+            )
+            port map(
+               clk_i=>clk_i,
+               rst_i=>rst_i,
 
+               lli_re_i=>icache_re,
+               lli_adr_i=>lli_adr,
+               lli_dat_o=>lli_dat_cache,
+               lli_busy_o=>lli_cache_busy,
 
+               wbm_cyc_o=>wb_ibus_cyc_o,
+               wbm_stb_o=>wb_ibus_stb_o,
+               wbm_cti_o=>wb_ibus_cti_o,
+               wbm_bte_o=>wb_ibus_bte_o,
+               wbm_ack_i=>wb_ibus_ack_i,
+               wbm_adr_o=>wb_ibus_adr_o,
+               wbm_dat_i=>wb_ibus_dat_i,
+               cc_invalidate_i => lli_cc_invalidate,
+               cc_invalidate_complete_o => open
 
+            );
+  end generate;
 
+  no_icache: if CACHE_SIZE_WORDS=0 generate
+
+    lli_cache_busy <= '0';
+    wb_ibus_cyc_o <= '0';
+    wb_ibus_adr_o <= (others=>'0');
+    wb_ibus_bte_o <= (others=>'0');
+    wb_ibus_cti_o <= (others=>'0');
+    wb_ibus_stb_o <='0';
+
+  end generate;
 
 
 end architecture;

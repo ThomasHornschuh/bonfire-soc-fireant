@@ -15,10 +15,6 @@
 
 ----------------------------------------------------------------------------------
 
-
-
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.std_logic_textio.all;
@@ -27,20 +23,15 @@ use IEEE.std_logic_textio.all;
 -- arithmetic functions with Signed or Unsigned values
 use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+
 
 library STD;
 use STD.textio.all;
 
-entity MainMemory is
+entity main_memory_laned is
     generic (RamFileName : string := "meminit.ram";
              mode : string := "B";
              ADDR_WIDTH: integer;
-             SIZE : integer;
-             Swapbytes : boolean; -- SWAP Bytes in RAM word in low byte first order to use data2mem
              EnableSecondPort : boolean := true -- enable inference of the second port
             );
     Port ( DBOut : out  STD_LOGIC_VECTOR (31 downto 0);
@@ -56,10 +47,11 @@ entity MainMemory is
            DBOutB : out  STD_LOGIC_VECTOR (31 downto 0)
 
               );
-end MainMemory;
+end main_memory_laned;
 
 
-architecture Behavioral of MainMemory is
+architecture Behavioral of main_memory_laned is
+
 
 begin
 

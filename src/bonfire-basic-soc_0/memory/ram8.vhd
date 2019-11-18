@@ -63,7 +63,7 @@ variable r : tRam;
 variable is_open : boolean;
 
 begin
-  report "RamFileName is " & RAM_FILE;
+  report "ram8: RamFileName is " & RAM_FILE;
   if RAM_FILE /= "" then
     file_open(RamFile,RAM_FILE,READ_MODE);
     is_open:=true;

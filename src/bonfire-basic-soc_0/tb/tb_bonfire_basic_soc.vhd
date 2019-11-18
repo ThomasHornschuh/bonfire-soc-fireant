@@ -13,8 +13,11 @@ use work.txt_util.all;
 
 entity tb_bonfire_basic_soc is
 generic(
-         RamFileName : string :="../src/bonfire-basic-soc_0/compiled_code/sim_hello.hex";
+         --RamFileName : string :="/home/thomas/development/bonfire/bonfire-software/test/mult.hex";
+         RamFileName : string :="/home/thomas/development/bonfire/bonfire-software/monitor/BASIC_12_monitor.hex";
+         --RamFileName : string :="../src/bonfire-basic-soc_0/compiled_code/sim_hello.hex";
          mode : string := "H";       -- only used when UseBRAMPrimitives is false
+         LANED_RAM : boolean := true; -- Implement RAM in Byte Lanes
          Swapbytes : boolean := false; -- SWAP Bytes in RAM word in low byte first order to use data2mem
          ExtRAM : boolean := false; -- "Simulate" External RAM as Bock RAM
          BurstSize : natural := 8;
@@ -25,8 +28,10 @@ generic(
          REG_RAM_STYLE : string := "block";
          NUM_GPIO   : natural := 8;
          DEVICE_FAMILY : string :=  "";
-         UART_BAUDRATE : real := 115200.0
-
+         UART_BAUDRATE : real := 38400.0;
+         BYPASS_CLKGEN : boolean := true;
+         TB_PERIOD : time := 83.333 ns
+         --TB_PERIOD : time := 10 ns
        );
 
 
@@ -34,21 +39,22 @@ end tb_bonfire_basic_soc;
 
 architecture tb of tb_bonfire_basic_soc is
 
-    component bonfire_basic_soc
+    component bonfire_basic_soc_top
     generic (
-         RamFileName : string:="";    -- :="compiled_code/monitor.hex";
-         mode : string := "H";       -- only used when UseBRAMPrimitives is false
-         Swapbytes : boolean := true; -- SWAP Bytes in RAM word in low byte first order to use data2mem
-         ExtRAM : boolean := false; -- "Simulate" External RAM as Bock RAM
+         RamFileName : string:="";
+         mode : string := "H";
+         LANED_RAM : boolean := true;
+         Swapbytes : boolean := true;
+         ExtRAM : boolean := false;
          BurstSize : natural := 8;
-         CacheSizeWords : natural := 512; -- 2KB Instruction Cache
+         CacheSizeWords : natural := 512;
          EnableDCache : boolean := false;
          DCacheSizeWords : natural := 512;
          MUL_ARCH: string := "spartandsp";
          REG_RAM_STYLE : string := "block";
          NUM_GPIO   : natural := 8;
-         DEVICE_FAMILY : string :=  ""
-
+         DEVICE_FAMILY : string :=  "";
+         BYPASS_CLKGEN : boolean := false
        );
 
         port (sysclk         : in std_logic;
@@ -76,7 +82,7 @@ architecture tb of tb_bonfire_basic_soc is
     signal flash_spi_miso : std_logic;
     signal GPIO           : std_logic_vector (num_gpio-1 downto 0);
 
-    constant TbPeriod : time := 10 ns;  -- 100 Mhz (for ARTY)
+
     signal TbClock : std_logic := '0';
     signal TbSimEnded : std_logic := '0';
 
@@ -108,11 +114,12 @@ architecture tb of tb_bonfire_basic_soc is
 
 begin
 
-    dut : bonfire_basic_soc
+    dut : bonfire_basic_soc_top
     generic map (
       RamFileName => RamFileName,
          mode => mode,
          Swapbytes => SwapBytes,
+         LANED_RAM => LANED_RAM,
          ExtRAM => ExtRAM,
          BurstSize => BurstSize,
          CacheSizeWords => CacheSizeWords,
@@ -121,7 +128,8 @@ begin
          MUL_ARCH => MUL_ARCH,
          REG_RAM_STYLE => REG_RAM_STYLE,
          NUM_GPIO  => NUM_GPIO,
-         DEVICE_FAMILY => DEVICE_FAMILY
+         DEVICE_FAMILY => DEVICE_FAMILY,
+         BYPASS_CLKGEN => BYPASS_CLKGEN
 
     )
     port map (sysclk         => sysclk,
@@ -153,14 +161,14 @@ begin
 
     process(total_count)
     begin
-      report "Byte received over UART" severity note;
+      report "Byte received over UART"  severity note;
 
     end process;
 
 
 
     -- Clock generation
-    TbClock <= not TbClock after TbPeriod/2 when TbSimEnded /= '1' else '0';
+    TbClock <= not TbClock after TB_PERIOD/2 when TbSimEnded /= '1' else '0';
 
     -- EDIT: Check that sysclk is really your main clock signal
     sysclk <= TbClock;
@@ -181,7 +189,7 @@ begin
         I_RESET <= '1';
         wait for 50 ns;
         I_RESET <= '0';
-      
+
         -- EDIT Add stimuli here
 
 
@@ -189,11 +197,9 @@ begin
         --TbSimEnded <= '1';
         wait until uart0_stop;
         print(OUTPUT,"UART0 Test captured bytes: " & str(total_count(0)) & " framing errors: " & str(framing_errors(0)));
-      
+
         TbSimEnded <= '1';
         wait;
     end process;
 
 end tb;
-
-

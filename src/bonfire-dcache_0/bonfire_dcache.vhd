@@ -349,28 +349,29 @@ end generate;
 
 
 cache_ram_spartan6: if gen_sp6_special generate
+--  report "SPARTAN6 not supported" severity failure; 
 
-
-  Inst_bonfire_dcache_cacheram: entity work.dcache_ram8K_spartan6
-  GENERIC MAP (
-    CACHE_SIZE => CACHE_SIZE,
-    MASTER_DATA_WIDTH => MASTER_DATA_WIDTH,
-    ATTR_KEEP_HIERARCHY => "FALSE"
-
-  )
-  PORT MAP(
-      slave_db_i => cache_DBIn,
-      slave_db_o => cache_DBOut,
-      slave_wren_i => cache_wren,
-      slave_en_i => slave_en_i ,
-      slave_adr_i => slave_cache_adr,
-      master_db_i => wbm_dat_i,
-      master_db_o => cache_ram_out,
-      master_we_i => master_we_i,
-      master_en_i => master_en_i ,
-      master_adr_i => cache_AdrBus,
-      clk_i => clk_i
-   );
+  --
+  -- Inst_bonfire_dcache_cacheram: entity work.dcache_ram8K_spartan6
+  -- GENERIC MAP (
+  --   CACHE_SIZE => CACHE_SIZE,
+  --   MASTER_DATA_WIDTH => MASTER_DATA_WIDTH,
+  --   ATTR_KEEP_HIERARCHY => "FALSE"
+  --
+  -- )
+  -- PORT MAP(
+  --     slave_db_i => cache_DBIn,
+  --     slave_db_o => cache_DBOut,
+  --     slave_wren_i => cache_wren,
+  --     slave_en_i => slave_en_i ,
+  --     slave_adr_i => slave_cache_adr,
+  --     master_db_i => wbm_dat_i,
+  --     master_db_o => cache_ram_out,
+  --     master_we_i => master_we_i,
+  --     master_en_i => master_en_i ,
+  --     master_adr_i => cache_AdrBus,
+  --     clk_i => clk_i
+  --  );
 end generate;
 
 

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<efx:project name="bonfire_basic_soc" description="" last_change_date="Mo. November 18 2019 15:17:30" location="/home/thomas/development/Effinix/bonfire-basic-soc_0" sw_version="2019.2.192" last_run_state="pass" last_run_tool="efx_pgm" last_run_flow="bitstream" config_result_in_sync="true" design_ood="sync" place_ood="sync" route_ood="sync" xmlns:efx="http://www.efinixinc.com/enf_proj" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efinixinc.com/enf_proj enf_proj.xsd">
+<efx:project name="bonfire_basic_soc" description="" last_change_date="Mo. November 18 2019 21:18:14" location="/home/thomas/development/Effinix/bonfire-basic-soc_0" sw_version="2019.2.192" last_run_state="pass" last_run_tool="efx_pgm" last_run_flow="bitstream" config_result_in_sync="true" design_ood="sync" place_ood="sync" route_ood="sync" xmlns:efx="http://www.efinixinc.com/enf_proj" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efinixinc.com/enf_proj enf_proj.xsd">
     <efx:device_info>
         <efx:family name="Trion"/>
         <efx:device name="T8F81"/>
         <efx:timing_model name="C2"/>
     </efx:device_info>
     <efx:design_info def_veri_version="verilog_2k" def_vhdl_version="vhdl_2008">
-        <efx:top_module name=""/>
+        <efx:top_module name="bonfire_basic_soc_top"/>
         <efx:design_file name="src/bonfire-cpu_0/rtl/riscv_interrupts.vhd" version="vhdl_2008"/>
         <efx:design_file name="src/bonfire-cpu_0/rtl/riscv_csr_unit.vhd" version="vhdl_2008"/>
         <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_interrupt_mux.vhd" version="vhdl_2008"/>
@@ -37,11 +37,8 @@
         <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_mul_opt.vhd" version="vhdl_2008"/>
         <efx:design_file name="src/bonfire-cpu_0/rtl/lxp32_mul_dsp.vhd" version="vhdl_2008"/>
         <efx:design_file name="src/bonfire-cpu_0/rtl/bonfire_dm_icache.vhd" version="vhdl_2008"/>
-        <efx:design_file name="src/bonfire-basic-soc_0/byte_swapper.vhd" version="vhdl_2008"/>
         <efx:design_file name="src/bonfire-basic-soc_0/cpu_dbus_connect.vhd" version="vhdl_2008"/>
-        <efx:design_file name="src/bonfire-basic-soc_0/bonfire_basic_soc_top.vhd" version="vhdl_2008"/>
         <efx:design_file name="src/bonfire-basic-soc_0/dram_arbiter.vhd" version="vhdl_2008"/>
-        <efx:design_file name="src/bonfire-basic-soc_0/wbs_memory_interface.vhd" version="vhdl_2008"/>
         <efx:design_file name="src/bonfire-util_0/log2.vhd" version="vhdl_2008"/>
         <efx:design_file name="src/zpuino-uart_0/tx_unit.vhd" version="vhdl_2008"/>
         <efx:design_file name="src/zpuino-uart_0/zpuino_uart_fifo.vhd" version="vhdl_2008"/>
@@ -49,8 +46,22 @@
         <efx:design_file name="src/zpuino-uart_0/uart_rx.vhd" version="vhdl_2008"/>
         <efx:design_file name="src/zpuino-uart_0/uart_brgen.vhd" version="vhdl_2008"/>
         <efx:design_file name="src/zpuino-uart_0/uart_mv_filter.vhd" version="vhdl_2008"/>
-        <efx:design_file name="src/bonfire-basic-soc_0/ram8.vhd" version="vhdl_2008"/>
-        <efx:design_file name="src/bonfire-basic-soc_0/main_memory_laned.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-basic-soc_0/bonfire_basic_soc.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-basic-soc_0/memory/main_memory_laned.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-basic-soc_0/memory/ram8.vhd" version="vhdl_2008"/>
+        <efx:design_file name="local_src/bonfire_basic_soc_top.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-dcache_0/bonfire_dcache_set.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-dcache_0/bonfire_dcache_help.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-dcache_0/bonfire_dcache_multi_sets.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-dcache_0/bonfire_dcache.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-dcache_0/bonfire_dcache_cacheram.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-soc-io_0/bonfire_soc_io.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-soc-io_0/io_intercon.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-soc-io_0/gpio.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-gpio_0/gpio_bit.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-gpio_0/bonfire_gpio.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-spiflash_0/spi/wb_spi_interface.vhd" version="vhdl_2008"/>
+        <efx:design_file name="src/bonfire-spiflash_0/spi/spimaster.vhd" version="vhdl_2008"/>
         <efx:top_vhdl_arch name=""/>
     </efx:design_info>
     <efx:constraint_info>

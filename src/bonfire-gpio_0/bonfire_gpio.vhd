@@ -268,20 +268,20 @@ end generate;
           regnum := get_regnum(wb_adr_i);
           case regnum is
              -- when tr_value => -- read only
-             when tr_input_en =>  input_en <= wb_dat_i;
-             when tr_output_en => output_en <= wb_dat_i;
-             when tr_port =>  port_reg <= wb_dat_i;
-             when tr_rise_ie => rise_ie <= wb_dat_i;
-             when tr_rise_ip => clear_pending(rise_ip,wb_dat_i);
-             when tr_fall_ie => fall_ie <= wb_dat_i;
-             when tr_fall_ip => clear_pending(fall_ip,wb_dat_i);
-             when tr_high_ie => high_ie <= wb_dat_i;
-             when tr_high_ip => clear_pending(high_ip,wb_dat_i);
-             when tr_low_ie => low_ie <= wb_dat_i;
-             when tr_low_ip => clear_pending(low_ip,wb_dat_i);
-             when tr_out_xor => out_xor <= wb_dat_i;
+                when tr_input_en =>  input_en <= wb_dat_i(input_en'range);
+                when tr_output_en => output_en <= wb_dat_i(output_en'range);
+                when tr_port =>  port_reg <= wb_dat_i(port_reg'range);
+                when tr_rise_ie => rise_ie <= wb_dat_i(rise_ie'range);
+                when tr_rise_ip => clear_pending(rise_ip,wb_dat_i);
+                when tr_fall_ie => fall_ie <= wb_dat_i(fall_ie'range);
+                when tr_fall_ip => clear_pending(fall_ip,wb_dat_i);
+                when tr_high_ie => high_ie <= wb_dat_i(high_ie'range);
+                when tr_high_ip => clear_pending(high_ip,wb_dat_i);
+                when tr_low_ie => low_ie <= wb_dat_i(low_ie'range);
+                when tr_low_ip => clear_pending(low_ip,wb_dat_i);
+                when tr_out_xor => out_xor <= wb_dat_i(out_xor'range);
 
-             when others=>
+                when others=>
 
 
           end case;
@@ -302,4 +302,3 @@ end generate;
 
 
 end Behavioral;
-

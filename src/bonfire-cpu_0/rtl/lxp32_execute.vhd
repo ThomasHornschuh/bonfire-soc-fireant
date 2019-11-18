@@ -353,7 +353,8 @@ begin
 end process;
 
 -- Jump Destination determination
-process(target_address,mtvec,mepc,cmd_tret_i,cmd_trap_i,ex_exception)
+process(target_address,mtvec,mepc,cmd_tret_i,cmd_trap_i,ex_exception,
+        jump_condition,epc_i)
 begin
    if cmd_tret_i = '1' then
      jump_dst<=mepc;

@@ -176,11 +176,7 @@ csr_in <= csr_grp0 when csr_group(csr_adr)=X"0" and csr_mode(csr_adr)=m_stdprefi
 
 gen_mcycle: if MCYCLE_EN generate
 
--- csr_in <= csr_t1 when csr_adr(11 downto 8)=m_stdprefix or csr_adr(11 downto 8) = m_roprefix else
---           mcycle(31 downto 0) when  csr_adr = a_mcycle else
---           mcycle(63 downto 32) when csr_adr = a_mcycleh else
---           get_bonfire_csr(m_bonfire) when csr_adr = m_bonfire_csr else
---           (others=>'X'); -- don't care
+
 
 Inst_counter_64Bit: entity work.counter_64Bit PORT MAP(
     clk_i => clk_i ,
@@ -189,13 +185,6 @@ Inst_counter_64Bit: entity work.counter_64Bit PORT MAP(
   );
 
 end generate;
-
--- gen_no_mcycle: if not MCYCLE_EN generate
---
---   csr_in <= csr_t1;
---
--- end generate;
-
 
 
 csr_alu: process(op1_i,csr_in,csr_op_i)
