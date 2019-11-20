@@ -23,15 +23,15 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity bonfire_basic_soc_top is
 generic (
-     RamFileName : string:="/home/thomas/development/bonfire/bonfire-software/test/sim_hello.hex";
+     RamFileName : string:="/home/thomas/development/bonfire/bonfire-software/test/mult.hex";
      BYPASS_CLKGEN : boolean := false
 
    );
    port(
         sysclk  : in  std_logic;
-        --o_reset   : out std_logic;
-        --i_locked : in std_logic;
-        resetn : in std_logic; 
+        o_resetn : out std_logic;
+        i_locked : in std_logic;
+        resetn : in std_logic;
 
         -- UART0 signals:
         uart0_txd : out std_logic;
@@ -48,7 +48,7 @@ architecture Behavioral of bonfire_basic_soc_top is
 constant NUM_GPIO : natural := 4;
 
 constant TOTAL_GPIO : natural := NUM_GPIO;
-constant BRAM_ADR_WIDTH : natural := 9;
+constant BRAM_ADR_WIDTH : natural := 11;
 
 
 
@@ -60,6 +60,8 @@ component bonfire_basic_soc is
     ENABLE_UART1    : boolean := false;
     ENABLE_SPI      : boolean := false;
     ENABLE_DCACHE   : boolean := false;
+    ENABLE_GPIO     : boolean := true;
+    UART_FIFO_DEPTH : natural := 6;
     BRAM_ADR_WIDTH  : natural := 13;
     BurstSize       : natural := 8;
     CacheSizeWords  : natural := 512;
@@ -152,7 +154,7 @@ begin
   LED(1) <= not gpio_o(1);
   LED(2) <= not gpio_o(2);
   LED(3) <= not gpio_o(3);
-  
+
 
 
 
@@ -160,6 +162,7 @@ begin
   generic map (
     ENABLE_EXT_RAM  => false,
     ENABLE_UART1    => false,
+    UART_FIFO_DEPTH => 6,
     ENABLE_SPI      => false,
     ENABLE_DCACHE   => false,
     BRAM_ADR_WIDTH  => BRAM_ADR_WIDTH,
@@ -226,18 +229,19 @@ ram: entity work.main_memory_laned
 
 
 
--- Clock
+-- Clock and reset
 
 clk <= sysclk;
+o_resetn <= '1'; -- No Reset for PLL
 
 process(clk) begin
    if rising_edge(clk) then
-      res1 <= not resetn;
+      res1 <= not resetn or not i_locked;
       res2 <= res1;
-      reset <= res2; 
+      reset <= res2;
    end if;
 end process;
---reset <= not i_locked;
+
 
 
 

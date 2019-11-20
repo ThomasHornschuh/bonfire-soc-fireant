@@ -28,6 +28,8 @@ generic (
      ENABLE_UART1 : boolean := false;
      ENABLE_SPI : boolean := false;
      ENABLE_DCACHE : boolean := false;
+     ENABLE_GPIO : boolean := true; 
+     UART_FIFO_DEPTH : natural := 6;
 
      BRAM_ADR_WIDTH : natural := 13;
 
@@ -385,11 +387,17 @@ extram:  if ENABLE_EXT_RAM generate
 end generate;
 
 
+
+
 Inst_bonfire_soc_io: entity  work.bonfire_soc_io
 GENERIC MAP (
   NUM_GPIO_BITS => gpio_o'length,
-  ADR_HIGH => io_adr'high
-
+  ADR_HIGH => io_adr'high,
+  UART_FIFO_DEPTH => UART_FIFO_DEPTH,
+  ENABLE_UART0 => true,
+  ENABLE_UART1 => ENABLE_UART1,
+  ENABLE_SPI => ENABLE_SPI,
+  ENABLE_GPIO => ENABLE_GPIO
 )
 PORT MAP(
         uart0_txd => uart0_txd,
