@@ -23,9 +23,9 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity bonfire_basic_soc_top is
 generic (
-     RamFileName : string:="/home/thomas/development/bonfire/bonfire-software/test/mult.hex";
-     BYPASS_CLKGEN : boolean := false
-
+     --RamFileName : string:="/home/thomas/development/bonfire/bonfire-software/test/sim_hello.hex";
+     RamFileName : string := "src/bonfire-basic-soc_0/compiled_code/sim_hello.hex";
+     BRANCH_PREDICTOR : boolean := true
    );
    port(
         sysclk  : in  std_logic;
@@ -69,6 +69,7 @@ component bonfire_basic_soc is
     BRAM_ADR_BASE : std_logic_vector(7 downto 0) := X"0C";
     MUL_ARCH: string := "spartandsp";
     REG_RAM_STYLE : string := "block";
+    BRANCH_PREDICTOR : boolean := true;
     NUM_GPIO        : natural := 8;
     DEVICE_FAMILY : string :=  ""
   );
@@ -156,8 +157,6 @@ begin
   LED(3) <= not gpio_o(3);
 
 
-
-
   bonfire_basic_soc_i : bonfire_basic_soc
   generic map (
     ENABLE_EXT_RAM  => false,
@@ -169,6 +168,7 @@ begin
     BurstSize       => 1,
     CacheSizeWords  => 0,
     DCacheSizeWords => 0,
+    BRANCH_PREDICTOR => BRANCH_PREDICTOR,
     NUM_GPIO        => NUM_GPIO
   )
   port map (

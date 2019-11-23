@@ -28,7 +28,7 @@ generic (
      ENABLE_UART1 : boolean := false;
      ENABLE_SPI : boolean := false;
      ENABLE_DCACHE : boolean := false;
-     ENABLE_GPIO : boolean := true; 
+     ENABLE_GPIO : boolean := true;
      UART_FIFO_DEPTH : natural := 6;
 
      BRAM_ADR_WIDTH : natural := 13;
@@ -39,6 +39,7 @@ generic (
      BRAM_ADR_BASE : std_logic_vector(7 downto 0) := X"0C";
      MUL_ARCH: string := "spartandsp";
      REG_RAM_STYLE : string := "block";
+     BRANCH_PREDICTOR : boolean := true;
      NUM_GPIO   : natural := 8;
      DEVICE_FAMILY : string :=  ""
    );
@@ -211,7 +212,7 @@ begin
        CACHE_SIZE_WORDS=>CacheSizeWords,
        BRAM_PORT_ADR_SIZE=>ram_adr_width,
        ENABLE_TIMER=>true,
-       BRANCH_PREDICTOR=>true
+       BRANCH_PREDICTOR=>BRANCH_PREDICTOR
      )
 
      PORT MAP(
