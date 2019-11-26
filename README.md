@@ -76,7 +76,7 @@ local_src contains the toplevel file for the FireAnt implementation.
 
 ## FireAnt specifics
 The Block RAMs of the FireAnt does not have byte select write lines, and instantiating Memory from the standard "MainMemory.vhd" File does not work. Therefore in the memory subdirectory an implementation of "Laned" Memory is provided, which defines 4  ram8 (n*8 Bits) instances for a 32 Bit word.
-The default configuration is 8KBytes of RAM, synthesis maps this to  16 2048*2 Bit BRAMs.
+The default configuration is 8KBytes of RAM, synthesis maps this to  16 2048 x 2 Bit BRAMs.
 
 Currently there are no optimizations for the Trion FPGAs. While the Bonfire-CPU easily runs with around 100 Mhz on a Spartan-6, the maximul Frequency on the T8C2 is ~30- 32Mhz.
 The 25Mhz of the default configuration is on the safe side.
