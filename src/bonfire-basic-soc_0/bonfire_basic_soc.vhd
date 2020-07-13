@@ -295,7 +295,6 @@ no_dcache: if not generate_dcache  generate
       dcm_sel <= dbmem_sel;
       dcm_cti <= "000";
       dcm_bte <= "00";
-      dcm_adr <= dbmem_adr;
       dcm_dat_wr <= dbmem_dat_wr;
 
       dbmem_dat_rd <= dcm_dat_rd;
